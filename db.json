@@ -1,0 +1,54 @@
+{
+  "dishes": [
+    {
+      "id": "1",
+      "name": "Köttbullar",
+      "meat": true
+    },
+    {
+      "id": "2",
+      "name": "Fiskpinnar",
+      "fish": true
+    },
+    {
+      "id": "3",
+      "name": "Falafel",
+      "veg": true
+    },
+    {
+      "id": "4",
+      "name": "Korv Stroganoff",
+      "meat": true
+    },
+    {
+      "id": "5",
+      "name": "Sushi",
+      "fish": true
+    },
+    {
+      "id": "6",
+      "name": "Pannkakor",
+      "veg": true
+    },
+    {
+      "id": "7",
+      "name": "Köttfärssås",
+      "meat": true
+    },
+    {
+      "id": "8",
+      "name": "Lax i ugn",
+      "fish": true
+    },
+    {
+      "id": "9",
+      "name": "Grönsaksbullar",
+      "veg": true
+    },
+    {
+      "id": "10",
+      "name": "Köttbullar2",
+      "meat": true
+    }
+  ]
+}
