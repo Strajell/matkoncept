@@ -43,7 +43,7 @@
             <v-col cols="3"
               ><v-card class="mx-auto" max-width="344">
                 <v-card-title>
-                  <div>Veckans matsedel</div>
+                  <div id="cardtitle">Veckans matsedel</div>
                 </v-card-title>
 
                 <v-card-text>
@@ -81,10 +81,11 @@ export default {
     title: String,
   },
   async mounted() {
-    console.log("Mounted");
     const dishes = [];
+    const week = [];
     this.dishes = await this.fetchDishes();
-    console.log(dishes);
+    this.week = await this.fetchWeek();
+    return dishes, week;
   },
   data() {
     return {
@@ -93,47 +94,21 @@ export default {
       dishCardShow: false,
       chosenFoodFish: false,
       chosenFoodVeg: false,
-      week: [
-        {
-          id: "0",
-          day: "Måndag",
-        },
-        {
-          id: "1",
-          day: "Tisdag",
-        },
-        {
-          id: "2",
-          day: "Onsdag",
-        },
-        {
-          id: "3",
-          day: "Torsdag",
-        },
-        {
-          id: "4",
-          day: "Fredag",
-        },
-        {
-          id: "5",
-          day: "Lördag",
-        },
-        {
-          id: "6",
-          day: "Söndag",
-        },
-      ],
+      week: [],
     };
   },
 
   methods: {
-    /* async created() {
-      this.dishes = await this.fetchDishes();
-    }, */
-
     async fetchDishes() {
       const res = await fetch("http://localhost:5000/dishes");
       const data = await res.json();
+      return data;
+    },
+
+    async fetchWeek() {
+      const res = await fetch("http://localhost:5000/week");
+      const data = await res.json();
+
       return data;
     },
 
@@ -166,3 +141,22 @@ export default {
   },
 };
 </script>
+
+<style>
+.v-btn {
+  margin: 10px;
+}
+h2 {
+  font-family: "Lato", sans-serif;
+  font-size: 54px;
+  font-weight: 300;
+  line-height: 58px;
+  margin: 0 0 15px;
+}
+#cardtitle {
+  font-family: "Lato", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  margin: 0 0 15px;
+}
+</style>

@@ -50,5 +50,35 @@
       "name": "Köttbullar2",
       "meat": true
     }
+  ],
+  "week": [
+    {
+      "id": "0",
+      "day": "Måndag"
+    },
+    {
+      "id": "1",
+      "day": "Tisdag"
+    },
+    {
+      "id": "2",
+      "day": "Onsdag"
+    },
+    {
+      "id": "3",
+      "day": "Torsdag"
+    },
+    {
+      "id": "4",
+      "day": "Fredag"
+    },
+    {
+      "id": "5",
+      "day": "Lördag"
+    },
+    {
+      "id": "6",
+      "day": "Söndag"
+    }
   ]
 }
