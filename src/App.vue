@@ -5,70 +5,69 @@
       <v-container>
         <h2>Veckomeny</h2>
         <div>
-          <v-col cols="4">
-            <FoodButton
-              @btn-click="
-                // eslint-disable-next-line vue/no-mutating-props
-                chosenFoodMeat = !chosenFoodMeat
-              "
-              :color="chosenFoodMeat ? 'green' : ''"
-              :buttontext="'Kött'"
-            />
-            <FoodButton
-              @btn-click="
-                // eslint-disable-next-line vue/no-mutating-props
-                chosenFoodFish = !chosenFoodFish
-              "
-              :color="chosenFoodFish ? 'green' : ''"
-              :buttontext="'Fisk'"
-            />
-            <FoodButton
-              @btn-click="
-                // eslint-disable-next-line vue/no-mutating-props
-                chosenFoodVeg = !chosenFoodVeg
-              "
-              :color="chosenFoodVeg ? 'green' : ''"
-              :buttontext="'Veg'"
-            />
-          </v-col>
+          <v-row
+            ><v-col cols="3">
+              <div>
+                <FoodButton
+                  @btn-click="
+                    // eslint-disable-next-line vue/no-mutating-props
+                    chosenFoodMeat = !chosenFoodMeat
+                  "
+                  :color="chosenFoodMeat ? 'green' : ''"
+                  :buttontext="'Kött'"
+                />
+                <FoodButton
+                  @btn-click="
+                    // eslint-disable-next-line vue/no-mutating-props
+                    chosenFoodFish = !chosenFoodFish
+                  "
+                  :color="chosenFoodFish ? 'green' : ''"
+                  :buttontext="'Fisk'"
+                />
+                <FoodButton
+                  @btn-click="
+                    // eslint-disable-next-line vue/no-mutating-props
+                    chosenFoodVeg = !chosenFoodVeg
+                  "
+                  :color="chosenFoodVeg ? 'green' : ''"
+                  :buttontext="'Veg'"
+                />
+              </div>
+              <br />
+              <v-btn
+                large
+                @click="generate(chosenFoodMeat, chosenFoodFish, chosenFoodVeg)"
+                >Generera</v-btn
+              >
+            </v-col>
+            <v-col cols="3"
+              ><v-card class="mx-auto" max-width="344">
+                <v-card-title>
+                  <div>Veckans matsedel</div>
+                </v-card-title>
+
+                <v-card-text>
+                  <li v-for="day in week" :key="day.id">
+                    {{ day.day }}:
+                    {{
+                      makeWeekMenu(
+                        dishes,
+                        chosenFoodMeat,
+                        chosenFoodFish,
+                        chosenFoodVeg
+                      ).name
+                    }}
+                  </li>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn text color="deep-purple accent-4"> Recept </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col></v-row
+          >
         </div>
       </v-container>
-      <v-container>
-        <v-btn
-          large
-          @click="generate(chosenFoodMeat, chosenFoodFish, chosenFoodVeg)"
-          >Generera</v-btn
-        >
-
-        <v-card v-if="dishCardShow" class="mx-auto" max-width="344">
-          <v-card-title>
-            <div>Veckans matsedel</div>
-          </v-card-title>
-
-          <v-card-text>
-            <li v-for="day in week" :key="day.id">
-              {{ day.day }}:
-              {{
-                makeWeekMenu(
-                  dishes,
-                  chosenFoodMeat,
-                  chosenFoodFish,
-                  chosenFoodVeg
-                ).name
-              }}
-            </li>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              @click="dishCardShow = false"
-              text
-              color="deep-purple accent-4"
-            >
-              Stäng
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-container>
+      <v-container> </v-container>
     </v-main>
   </v-app>
 </template>
@@ -80,6 +79,12 @@ export default {
   name: "App",
   props: {
     title: String,
+  },
+  async mounted() {
+    console.log("Mounted");
+    const dishes = [];
+    this.dishes = await this.fetchDishes();
+    console.log(dishes);
   },
   data() {
     return {
@@ -124,7 +129,6 @@ export default {
   methods: {
     /* async created() {
       this.dishes = await this.fetchDishes();
-
     }, */
 
     async fetchDishes() {
